@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class MemberController {
 	
 	@Autowired
-	private MemberService service;
+	//private MemberService service;
 	
 	@GetMapping("login")
 	public void login() {
