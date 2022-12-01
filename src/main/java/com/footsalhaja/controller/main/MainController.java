@@ -26,7 +26,6 @@ public class MainController {
 		
 		model.addAttribute("main", main);
 
-		
 	}
 	
 	@GetMapping("list")
@@ -37,6 +36,12 @@ public class MainController {
 	@GetMapping("modify")
 	public void modify() {
 		
+	}
+	
+	@GetMapping("address") 
+	public void address() {
+		System.out.println("카카오 API 테스트");
+	
 	}
 	
 }

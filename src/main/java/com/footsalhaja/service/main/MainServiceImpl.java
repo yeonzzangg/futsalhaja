@@ -18,10 +18,11 @@ public class MainServiceImpl implements MainService {
 
 	public MainDto get(int bookId) {
 		return mapper.getById(bookId);
-	}
-	
-	public void getById(int id) {
 
+
+	public MainDto get(int bookId) {
+		return mapper.getById(bookId);
 	}
+
 
 }

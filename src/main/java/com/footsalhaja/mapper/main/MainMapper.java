@@ -5,7 +5,6 @@ import com.footsalhaja.domain.main.MainDto;
 public interface MainMapper {
 
 
-	MainDto getById(int bookId);
-
+MainDto getById(int bookId);
 
 }
