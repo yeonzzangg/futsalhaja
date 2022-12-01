@@ -6,6 +6,19 @@
 
  <mapper namespace="com.footsalhaja.mapper.main.MainMapper">
 
+ 	
+
+ 
+ 	<!-- 게시글 등록 -->
+ 	<insert id="insert">
+ 	INSERT INTO book
+		(bookId, stadiumTitle, content, matchType, level, status, bookDatetime, teamGender, location_locationId, member_userId)
+	VALUES
+		(#{bookId}, #{stadiumTitle}, #{content}, #{matchType}, #{level}, #{status}, #{bookDatetime}, #{teamGender}, #{location_locationId}, #{member_userId})
+ 	</insert>
+ 
+
+
  	<select id="getById" resultMap="getMap">
  	SELECT 
  		m.userId,
@@ -36,6 +49,7 @@
 		<result column="insertDatetime" property="insertDatetime"/>
 		<result column="teamGender" property="teamGender"></result>
  	</resultMap>	
+
 
 
  </mapper>
