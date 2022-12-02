@@ -28,9 +28,11 @@
 		<div class="col-5">
 			<h1>로그인</h1>
 			<form action="" method="post">
-				id <input type="text" name="username" id=""> <br>
-				pw <input type="password" name="password" id=""> <br>
-				<input type="checkBox" name="remember-me" id=""> Remember Me <br>
+				id <input type="text" name="username" > <br>
+				
+				pw <input type="password" name="password" > <br>
+				
+				<input type="checkBox" name="remember-me" > Remember Me <br>
 				
 				<%--  <sec:csrfInput/> 모든 페이지에 넣어야한다.. 하지만 복잡해서 지금은 안쓰겟다.  --%>
 			
