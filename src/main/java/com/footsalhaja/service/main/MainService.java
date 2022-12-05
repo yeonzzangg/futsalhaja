@@ -10,4 +10,8 @@ public interface MainService {
 	
 	public int update(MainDto main);
 
+	
+	public int remove(int bookId);
+
+
 }
