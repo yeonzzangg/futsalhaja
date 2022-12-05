@@ -22,11 +22,11 @@ import com.footsalhaja.domain.academy.AcademyReplyDto;
 
 import com.footsalhaja.domain.academy.Criteria;
 import com.footsalhaja.domain.academy.ReplyPageDto;
-
 import com.footsalhaja.service.academy.AcademyReplyService;
 
 @Controller
-@RequestMapping("reply")
+@RequestMapping("academy/reply")
+
 public class AcademyReplyController {
 	@Autowired
 	private AcademyReplyService service;
@@ -50,6 +50,9 @@ public class AcademyReplyController {
 		return replyList;
 		
 	}
+
+	
+
 
 	@PostMapping("add")
 	@ResponseBody
@@ -97,6 +100,9 @@ public class AcademyReplyController {
 		Map<String, Object> map = new HashMap<>();
 
 		int cnt = service.modify(reply);
+
+		
+		
 
 		if (cnt == 1) {
 			map.put("message", "댓글이 수정되었습니다.");

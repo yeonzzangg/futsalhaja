@@ -25,4 +25,7 @@ public interface AcademyMapper {
 	
 	public int getTotalCount(Criteria cri);
 
+	
+	
+
 }

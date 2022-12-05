@@ -20,7 +20,10 @@ public interface AcademyReplyService {
 	
 	public int modify(AcademyReplyDto reply);
 
+	
 	//페이지네이션 (댓글 수 포함)
 	public ReplyPageDto replyWithPaging(Criteria cri, int ab_number);
 	
+
+
 }

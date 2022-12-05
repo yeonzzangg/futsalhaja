@@ -42,6 +42,10 @@ public class AcademyReplyServiceImpl implements AcademyReplyService{
 		return mapper.modify(reply);
 	}
 
+	
+
+
+
 	@Override
 	public ReplyPageDto replyWithPaging(Criteria cri, int ab_number) {
 		System.out.println("get ReplyList with Criteria: " +cri);
@@ -53,5 +57,9 @@ public class AcademyReplyServiceImpl implements AcademyReplyService{
 		//댓글 수, 댓글페이징 리턴
 		return new ReplyPageDto(mapper.getTotalReplyCount(ab_number), mapper.getReplyListWithPaging(cri, ab_number, offset, records));
 	}
+
+
+	
+	
 
 }

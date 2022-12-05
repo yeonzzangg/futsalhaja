@@ -71,6 +71,7 @@
 	FROM academyBoardReply
 	WHERE academyBoard_ab_number = #{ab_number}
 	LIMIT #{offset}, #{records}
+
 	</select>
 	
 	

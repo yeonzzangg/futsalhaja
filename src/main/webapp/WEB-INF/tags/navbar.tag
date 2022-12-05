@@ -40,6 +40,8 @@
           커뮤니티
         </a>
 
+ 
+
         <ul class="dropdown-menu">
           <li><a class="dropdown-item" href="#">자유게시판</a></li>
           <li><a class="dropdown-item" href="http://localhost:8080/academy/list">아카데미</a></li>
