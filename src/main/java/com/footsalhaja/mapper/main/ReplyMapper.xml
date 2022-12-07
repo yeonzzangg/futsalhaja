@@ -8,7 +8,7 @@
  
  	<insert id="insert">
  	INSERT INTO bookReply (replyContent, book_bookId, member_userId)
- 	VALUES (#{replyContent}, #{bookId}, #{userId})
+  VALUES (#{replyContent}, #{bookId}, #{userId})
  	</insert>
  	
  	

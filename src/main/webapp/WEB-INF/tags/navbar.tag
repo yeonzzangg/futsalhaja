@@ -9,27 +9,26 @@
 
 <c:url value="/main/list" var="listLink" />
 
-<nav class="navbar navbar-expand-md navbar-dark bg-dark sticky-top">
+
+<nav class="navbar navbar-expand-md navbar-dark sticky-top" style="background: linear-gradient(to right, #5F7161, #6D8B74);">
   <!-- One of the primary actions on mobile is to call a business - This displays a phone button on mobile only -->
-  <div class="navbar-toggler-right">
+  <div class="navbar-toggler-right" style="color: #fff;">
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
   </div>
 
   <div class="collapse navbar-collapse flex-column " id="navbar">
-    <ul class="navbar-nav  w-100 px-3 justify-content-center">
-      <li class="nav-item active">
-
-        <a class="nav-link" href="http://localhost:8080/main/list">풋살하자<span class="sr-only">(current)</span></a>
-
+    <ul class="navbar-nav  w-100 px-3 justify-content-center" >
+      <li class="nav-item active" >
+        <a class="nav-link" href="${listLink }">풋살하자<span class="sr-only">(current)</span></a>
       </li> 
       <li class="nav-item active">
-         <a class="nav-link" href="" ><span style="font-weight:bold">${userIdValue } 님 환영합니다.</span></a>
+         <a class="nav-link" href="" ><span style="font-weight:bold; ">${userIdValue } 님 환영합니다.</span></a>
       </li>
     </ul>
 
-    <ul class="navbar-nav w-100 bg-secondary px-3 justify-content-end">
+    <ul class="navbar-nav w-100 px-3 justify-content-end" style="background: #5F7161;">
 
 	<li class="nav-item active">
         	<a class="nav-link" href="#">공지사항<span class="sr-only">(current)</span></a>
