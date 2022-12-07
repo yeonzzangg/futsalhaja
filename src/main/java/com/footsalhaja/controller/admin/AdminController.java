@@ -27,7 +27,12 @@ public class AdminController {
 	private MemberService memberService;
 	
 	@GetMapping("dashboard")
-	public void dashboard() {
+	public void dashboard(Model model) {
+		
+		//날짜별 최신순으로 문의 리스트 가져오기 
+		List <QnADto> waitingQnAList = adminService.selectWatingQnAList();
+		model.addAttribute("waitingQnAList", waitingQnAList);
+		
 		
 	}
 	

@@ -51,12 +51,12 @@
 					<th>회원권한</th>
 				</thead>
 				<tbody>
-					 <c:forEach items="${allMemberList}" var="member" >
+					 <c:forEach items="${allMemberList}" var="member" varStatus="st">
 					 <c:url value="/member/get" var="getLink">
 					 	<c:param name="userId" value="${member.userId}"/>
 					 </c:url>
 							<tr>
-							 	<td>${member.userId}</td>
+							 	<td>${st.count}</td>
 							 	<td>
 							 		<a href="${getLink}">${member.userId}</a>
 							 	</td>
