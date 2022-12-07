@@ -1,34 +1,33 @@
 package com.footsalhaja.controller.academy;
 
-
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import org.apache.commons.io.FileUtils;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
-
 
 import com.footsalhaja.domain.academy.BoardDto;
 import com.footsalhaja.domain.academy.Criteria;
 import com.footsalhaja.domain.academy.PageDto;
 import com.footsalhaja.service.academy.AcademyServiceImpl;
-
-
 
 
 @Controller
@@ -37,22 +36,20 @@ public class AcademyController {
 	
 	@Autowired
 	private AcademyServiceImpl service;
-
 	
-
 	
 	//list 목록
 	@GetMapping("list")
 	public void list(Criteria cri, Model model) {
-
 	
 		// request param
 		// business logic
 
 		String keyword = cri.getKeyword();
 		cri.setKeyword("%"+cri.getKeyword()+"%");
-
 		List<BoardDto> list = service.listBord(cri);
+		
+		System.out.println(list);
 		
 		// add attribute
 		model.addAttribute("boardList", list);
@@ -61,11 +58,9 @@ public class AcademyController {
 		int total = service.getTotal(cri);
 		model.addAttribute("pageMaker", new PageDto(cri, total));
 		// forward
-
 		
 		cri.setKeyword(keyword);
 		
-
 	}
 	
 	//register 등록
@@ -76,7 +71,6 @@ public class AcademyController {
 	
 	@PostMapping("register")
 	public String register(BoardDto board) {
-
 
 		service.insert(board);
 				
@@ -120,24 +114,29 @@ public class AcademyController {
 	  
 
 	
-
 	//get 게시글
 	@GetMapping("get")
-	public void get (@RequestParam("ab_number") int ab_number, Model model, @ModelAttribute("cri") Criteria cri) {
+	public void get (@RequestParam("ab_number") int ab_number, Model model, @ModelAttribute("cri") Criteria cri, Authentication authentication) {
+		String member_userId = null;
 		
-		BoardDto board = service.get(ab_number);
+		if (authentication != null) {
+			member_userId = authentication.getName();
+		}
 		
+		service.updateViewCount(ab_number);
+		BoardDto board = service.get(ab_number, member_userId);
 		model.addAttribute("board",board);
 		
 	}
 	
 	//modify 게시글
+	@PreAuthorize("@boardSecurity.checkWriter2(authentication.name, #ab_number)")
 	@GetMapping("modify")
 	public void modify(int ab_number, Model model) {
 		BoardDto board = service.get(ab_number);
 		model.addAttribute("board",board);
 	}
-	
+	@PreAuthorize("@boardSecurity.checkWriter2(authentication.name, #board.ab_number)")
 	@PostMapping("modify")
 	public String modify(BoardDto board ) {
 		service.modify(board);
@@ -146,6 +145,7 @@ public class AcademyController {
 	}
 	
 	//remove 게시글
+	@PreAuthorize("@boardSecurity.checkWriter2(authentication.name, #ab_number)")
 	@PostMapping("remove") 
 	public String remove(int ab_number) {
 		service.remove(ab_number);
@@ -153,5 +153,16 @@ public class AcademyController {
 		return "redirect:/academy/list";
 	}
 	
+	//좋아요 입력
+	@PutMapping("like")
+	@ResponseBody
+	@PreAuthorize("isAuthenticated()")
+	public Map<String, Object> like(@RequestBody Map<String, String> req,
+			Authentication authentication) {
+		
+		Map<String, Object> result = service.updateLike(req.get("ab_number"), authentication.getName());
+		
+		return result;
+	}
 	
 }

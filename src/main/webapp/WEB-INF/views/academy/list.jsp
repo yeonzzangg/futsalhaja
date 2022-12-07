@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="my" tagdir="/WEB-INF/tags" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -38,9 +39,11 @@
 						<tr>
 							<th>번호</th>
 							<th>말머리</th>
+							<th>좋아요</th>
 							<th>제목</th>
 							<th>작성자</th>
 							<th>작성시간</th>
+							<th>조회수</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -48,6 +51,7 @@
 							<tr>
 								<td>${board.ab_number }</td>
 								<td>${board.ab_category }</td>
+								<td>${board.countLike }</td>
 								<td>
  									<c:url value="/academy/get" var="getLink">
 										<c:param name="ab_number" value="${board.ab_number}"></c:param>
@@ -59,7 +63,6 @@
 										${board.ab_title}
 									</a>
 									
-
 									<!-- 댓글 수 출력 -->
 									<c:if test="${board.replyCnt > 0 }">
 										<span class="badge rounded-pill text-bg-light">
@@ -70,7 +73,6 @@
 									
 									<!-- 파일 수 출력 -->
 									<%-- <c:if test="${board.countFile > 0 }">
-
 										<span class="badge rounded-pill text-bg-light">
 											<i class="fa-regular fa-file"></i>
 											${board.countFile }
@@ -79,6 +81,7 @@
 								</td>
 								<td>${board.member_userId }</td>
 								<td>${board.ab_insertDatetime }</td>
+								<td>${board.ab_viewCount }</td>
 							</tr>
 						</c:forEach> 
 					</tbody>
@@ -174,7 +177,7 @@ for (const button of pageButtons){
 var searchForm = document.getElementById("searchForm");
 	
 document.querySelector("#searchForm button").addEventListener("click", function(e) {
-
+		e.preventDefault();
 		//화면에 검색 종류가 없다면 검색하지 않도록 제어
 		if(searchForm.querySelector("select[name='type']").value=="") {
 			alert("검색 종류를 선택하세요");
@@ -188,7 +191,6 @@ document.querySelector("#searchForm button").addEventListener("click", function(
 		
 		//검색버튼을 클릭하면 <form>태그의 전송을 막고, 페이지 번호는 1 이되도록 처리
 		searchForm.querySelector("input[name='pageNum']").value="1";
-
 		
 		searchForm.submit();
 	});
