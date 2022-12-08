@@ -126,5 +126,11 @@ public class QnAServiceImpl implements QnAService {
 		int cnt = qnaMapper.insertQnAReplyToAnswer(qnaReplyToAnswer);
 		return cnt;
 	}
+	//QnA답변에 대한 댓글 리스트 가져오기
+	@Override
+	public List<QnAReplyToAnswerDto> selectQnAReplyToAnswerList(QnAReplyToAnswerDto qnaReplyToAnswer) {
+
+		return qnaMapper.selectQnAReplyToAnswerList(qnaReplyToAnswer);
+	}
 	
 }

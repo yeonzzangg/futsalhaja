@@ -76,6 +76,11 @@
 							    	댓글작성
 							    </button>
 					    	</div>
+					    	<div>
+					    		<c:forEach items="${qnaReplyToAnswerList}" var="qnaReplyToAnswer">
+					    			<p>${qnaReplyToAnswer}</p>
+					    		</c:forEach>
+					    	</div>
 							<div class="collapse" id="qnaReplyCollapse${qnaReply.qnaReplyId}">
 								<div class="card card-body">
 									답변 번호<input type="text" id="qnaReplyId2" value="${qnaReply.qnaReplyId}" readonly>

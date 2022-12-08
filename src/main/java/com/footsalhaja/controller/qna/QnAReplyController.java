@@ -32,6 +32,7 @@ public class QnAReplyController {
 		//redirect: 넣자 
 		return "qna/myQnAGet?userId="+qnaReply.getUserId()+"&qnaId="+qnaReply.getQnaId();
 	}
+	
 	@PutMapping("addToAnswer")
 	@ResponseBody
 	private String qnaReplyToAnswer(@RequestBody QnAReplyToAnswerDto qnaReplyToAnswer, Authentication authentication, Model model) {

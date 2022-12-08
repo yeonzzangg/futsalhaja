@@ -170,5 +170,11 @@
 		INSERT INTO QnAReplyToAnswer (qnaReplyId, qnaId, writer, content, userId)
 		VALUES( #{qnaReplyId}, #{qnaId}, #{writer}, #{content}, #{userId} )
 	</insert>
+	<select id="selectQnAReplyToAnswerList" resultType="com.footsalhaja.domain.qna.QnAReplyToAnswerDto">
+		<!-- //qnaReplyToAnswerId, qnaReplyId, qnaId, writer, content, userId, insertDatetime -->
+		SELECT qnaReplyToAnswerId, qnaReplyId, qnaId, writer, content, userId, insertDatetime
+		FROM QnAReplyToAnswer
+		WHERE qnaId = #{qnaId}
+	</select>
 
  </mapper>

@@ -21,6 +21,7 @@ import com.footsalhaja.domain.qna.FAQDto;
 import com.footsalhaja.domain.qna.QnADto;
 import com.footsalhaja.domain.qna.QnAPageInfo;
 import com.footsalhaja.domain.qna.QnAReplyDto;
+import com.footsalhaja.domain.qna.QnAReplyToAnswerDto;
 import com.footsalhaja.service.qna.QnAService;
 
 @Controller
@@ -73,13 +74,19 @@ public class QnAController {
 
 	// MyQnAGet
 	@GetMapping("myQnAGet")
-	public void myQnAGet(String userId, int qnaId, Model model, QnAReplyDto qnaReply) {
+	public void myQnAGet(String userId, int qnaId, Model model, QnAReplyDto qnaReply, QnAReplyToAnswerDto qnaReplyToAnswer) {
 		QnADto qna = qnaService.selectMyQnAGetByQnAIdAndUserId(userId, qnaId);
 		//System.out.println(qna);
 		model.addAttribute("qna", qna);
 		
 		List<QnAReplyDto> qnaReplyList = qnaService.selectQnAReply(qnaReply);
 		model.addAttribute("qnaReplyList", qnaReplyList);
+		
+		//System.out.println("qnaReplyToAnswer : "+qnaReplyToAnswer);
+		List<QnAReplyToAnswerDto> qnaReplyToAnswerList = qnaService.selectQnAReplyToAnswerList(qnaReplyToAnswer);
+		System.out.println("qnaReplyToAnswerList : "+qnaReplyToAnswerList);
+		
+		model.addAttribute("qnaReplyToAnswerList", qnaReplyToAnswerList);
 		
 		
 	}
