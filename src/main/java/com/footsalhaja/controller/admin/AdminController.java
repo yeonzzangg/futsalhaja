@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.footsalhaja.domain.main.BookDto;
 import com.footsalhaja.domain.member.MemberDto;
 import com.footsalhaja.domain.member.MemberPageInfo;
 import com.footsalhaja.domain.qna.QnADto;
@@ -26,6 +27,7 @@ public class AdminController {
 	@Autowired
 	private MemberService memberService;
 	
+	
 	@GetMapping("dashboard")
 	public void dashboard(Model model) {
 		
@@ -33,7 +35,20 @@ public class AdminController {
 		List <QnADto> waitingQnAList = adminService.selectWatingQnAList();
 		model.addAttribute("waitingQnAList", waitingQnAList);
 		
+		List<BookDto> bookedList = adminService.selectBookedListToday();
+		//System.out.println(bookedList);
+		model.addAttribute("bookedList", bookedList);
 		
+		
+		//오늘의 방문자수 
+		int todayVisitCount = adminService.selectTodayVisitCount();
+		model.addAttribute("todayVisitCount", todayVisitCount);
+		//오늘의 예약건수 
+		int todaybookedCount = adminService.selectTodaybookedCount();
+		model.addAttribute("todaybookedCount", todaybookedCount);
+		//오늘의 문의건수 
+		int todayWaitingQnACount = adminService.selectTodayWaitingQnACount();
+		model.addAttribute("todayWaitingQnACount", todayWaitingQnACount);
 	}
 	
 	@GetMapping("admin")
@@ -42,7 +57,9 @@ public class AdminController {
     }
 	
 	@GetMapping("allBookList")
-	public void allBookList() {
+	public void allBookList(Model model) {
+		List<BookDto> allBookedList = adminService.selectBookedListAll();
+		model.addAttribute("allBookedList", allBookedList);
 		
 	}
 	
@@ -71,6 +88,8 @@ public class AdminController {
 		model.addAttribute("memberPageInfo", memberPageInfo);
 		
 	}
+	
+	
 	
 	@GetMapping("stadiumManagement")
 	public void stadiumManagement() {
