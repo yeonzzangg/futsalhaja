@@ -48,6 +48,8 @@
 		<result column="ab_content" property="ab_content"/>
 		<result column="ab_insertDatetime" property="ab_insertDatetime"/>
 		<result column="nickName" property="nickName"/>
+		<result column="countLike" property="countLike"/>
+		<result column="liked" property="liked"/>
 		<collection property="ab_fileName" ofType="string">
 			<result property="ab_fileName" column="ab_fileName"/>
 		</collection>
@@ -74,7 +76,8 @@
 	
 	<!-- 검색 조건 -->
 	<sql id="criteria">
-		<trim prefixOverrides="OR">
+	AND 
+		<trim prefix="(" suffix=")" prefixOverrides="OR">
 			<foreach item='type' collection="cri.typeArr">
 				<trim prefix="OR">
 					<choose>
@@ -95,7 +98,6 @@
 	
 	<!-- 페이지네이션 & 검색 -->
 	<select id="getListWithPaging" resultType="com.footsalhaja.domain.academy.BoardDto">
-	<![CDATA[
 	SELECT 		
 		b.ab_number,
 		b.ab_category,
@@ -103,7 +105,7 @@
 		b.ab_content,
 		b.member_userId,
 		b.ab_insertDatetime,
-		COUNT(r.academyBoard_ab_number) replyCnt,
+		COUNT(DISTINCT r.ab_replyNumber) replyCnt,
 		COUNT(DISTINCT l.member_userId) countLike,
 		COUNT(DISTINCT f.academyBoard_ab_number) countFile,
 		b.ab_viewCount,
@@ -113,14 +115,18 @@
 						LEFT JOIN academyBoardLike l ON b.ab_number = l.academyBoard_ab_number
 						LEFT JOIN academyBoardFileAttach f ON b.ab_number = f.academyBoard_ab_number
 						LEFT JOIN member m ON b.member_userId = m.userId
-	]]>
 	
+	WHERE 1=1
 	 <if test="cri.type!=null and cri.type!=''">
 	 <![CDATA[
-		WHERE
+
 	]]>
 	<include refid="criteria"></include>
 	</if>
+	<if test ="category !=null and category != ''">
+		AND b.ab_category = #{category}
+	</if>
+	
 	<![CDATA[
 	GROUP BY b.ab_number
 	ORDER BY b.ab_number DESC
@@ -132,14 +138,14 @@
 	<!-- 전체 데이터 수 -->
 	
 	<select id="getTotalCount" resultType="int">
-	<![CDATA[	
+
 		SELECT Count(*)
 		FROM academyBoard b
-		]]> 
+	
 		<!-- 검색조건 호출  -->
+		WHERE 1=1
 	<if test="cri.type!=null and cri.type!=''">
 	<![CDATA[	
-		WHERE
 		]]> 
 		<include refid="criteria"></include>
 	</if>
@@ -169,6 +175,12 @@
 		SELECT COUNT(*) FROM academyBoardLike
 		WHERE academyBoard_ab_number = #{ab_number}
 	</select>
+	
+	<!-- 게시글 삭제 전 좋아요 삭제 -->
+		<delete id="deleteLikeByBoardId">
+		DELETE FROM academyBoardLike
+		WHERE academyBoard_ab_number = #{ab_number}
+	</delete>
 	
 	<!-- 조회수 -->
 	<update id="updateViewCount">

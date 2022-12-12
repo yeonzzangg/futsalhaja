@@ -55,9 +55,6 @@
 								<td>
  									<c:url value="/academy/get" var="getLink">
 										<c:param name="ab_number" value="${board.ab_number}"></c:param>
-										<c:param name="pageNum" value="${pageMaker.cri.pageNum }"></c:param>
-										<c:param name="amount" value="${pageMaker.cri.amount }"></c:param>
-										
 									</c:url>
 									<a class= 'move' href="${getLink }">
 										${board.ab_title}
@@ -112,6 +109,13 @@
 								value='<c:out value="${pageMaker.cri.amount }"/>'>
 								
 							<button class='btn btn-default'>Search</button>
+							
+							<!-- 카테고리 -->
+							<button class='btn btn-default' name = "category" value = "레슨">레슨</button>
+							<button class='btn btn-default' name = "category" value = "꿀팁">꿀팁</button>
+							<button class='btn btn-default' name = "category" value = "팀원모집">팀원모집</button>
+							<button class='btn btn-default' name = "category" value = "질문/답변">질문/답변</button>
+							
 						</form>
 					</div>
 				</div>
