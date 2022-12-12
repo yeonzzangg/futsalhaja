@@ -14,12 +14,15 @@ public class MainDto {
 	private int bookId;
 	private String title;
 	private String content;
+  private int matchType;
+	private int level;
+	private int status;
+	private int region;
+	private LocalDateTime insertDatetime;
+	private int teamGender;
 
-	private String matchType;
-	private String level;
-	private String status;
-	private String region;
-	private String teamGender;
+
+	
 
 	private String location;
 
@@ -29,7 +32,7 @@ public class MainDto {
 	private String nickName; 
 	
 	private String bookDate;
-	private String bookTime;
+	private int bookTime;
 
 	private float lat;
 	private float lng;
