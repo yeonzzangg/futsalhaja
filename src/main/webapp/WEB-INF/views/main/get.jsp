@@ -9,7 +9,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<style>
+<style type="text/css">
 @font-face {
  font-family: 'NanumBarunGothic';
  font-style: normal;
@@ -84,10 +84,11 @@
 	border-radius: 10px;
 	font-color: black;
 	margin: auto;
-	width: 1000px;
+	width: 1020px;
 	height: 100px;
 	padding: 10px;
 	text-align: justify;
+	font-size: 20px;
 	
 }
 
@@ -103,11 +104,9 @@
 
 #modi {
 	position: absolute; 
-	bottom:300px; 
+	bottom:295px; 
 	left: 60px;
 }
-
-
 </style>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -352,7 +351,7 @@
 						</div>									
 					</div>
 				
-	        		<div style="font-size:12px; position:absolute; bottom: -20px; right: 100px;">
+	        		<div style="font-size:12px; position:absolute; bottom: -20px; right: 70px;">
 	        		${main.ago }
 	        		</div>
 							
@@ -390,6 +389,12 @@
 		<div class="input-group mb-3" style=" width:1000px;">
 			 <input type="text" id="replyInput" class="form-control" placeholder="댓글쓰기" aria-describedby="replySendButton">
 			 <button class="btn btn-outline-secondary" type="button" id="replySendButton">작성</button>
+			
+			<div class="form-check form-check-inline mt-3">
+			    <input class="form-check-input" type="checkbox" name="secret" id="secret" checked>
+			    <label class="form-check-label">비밀댓글</label>
+			</div>
+		
 		</div>
 	</div>
 
@@ -404,17 +409,16 @@
 	
 	</sec:authorize>
 	
-	<div class="container-md">
 	
-	<div class="row">
-		<div class="col">
-			<div id="replyListContainer">
-			
+			<div class="container-md">
+				<div class="row">
+					<div class="col">
+						<div id="replyListContainer"></div>
+					</div>
+				</div>
 			</div>
-		</div>
-	</div>
-	
-	</div>
+			
+		
 
 <%-- 댓글 삭제 확인 모달 --%>
 	<!-- Modal -->
@@ -436,6 +440,7 @@
 	  </div>
 	</div>
 </div>
+<my:footer></my:footer>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
 <script>
 const ctx = "${pageContext.request.contextPath}";
@@ -480,7 +485,7 @@ function listReply(){
 		
 	const replyDiv = `
 	
-	
+				
 				<div id="reply">  
 					<div  style="font-size: 15px; font-weight: bold;">
 					\${item.nickName} 
