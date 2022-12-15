@@ -1,5 +1,7 @@
 package com.footsalhaja.controller.main;
 
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -73,9 +75,10 @@ public class MainController {
 	
 	
 	  @GetMapping("list")
-	  public void list(Model model) {
-		  
-		  List<BookDto> list = service.listBook();
+	  public void list(Model model, @RequestParam(name="datepickerSday", required = false)Date datepickerSday,
+			  						@RequestParam(name="datepickerEday", required = false)Date datepickerEday) {
+	  
+		  List<BookDto> list = service.listBook(datepickerSday, datepickerEday);
 		  model.addAttribute("bookList", list); 
 		  
 		  // main/list 들어오면,  Visit테이블 방문자수 +1 씩 증가  by asj
