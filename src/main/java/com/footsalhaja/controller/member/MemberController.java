@@ -2,16 +2,20 @@ package com.footsalhaja.controller.member;
 
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
-
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.footsalhaja.domain.member.MemberDto;
@@ -23,6 +27,62 @@ public class MemberController {
 	
 	@Autowired
 	private MemberService memberService;
+	
+	@GetMapping("existId/{userId}")
+	@ResponseBody
+	public Map<String, Object> existId(@PathVariable String userId) {
+		Map<String, Object> map = new HashMap<>();
+
+		MemberDto member = memberService.getById(userId);
+
+		if (member == null) {
+			map.put("status", "not exist");
+			map.put("message", "사용가능한 아이디입니다.");
+		} else {
+			map.put("status", "exist");
+			map.put("message", "이미 존재하는 아이디입니다.");
+		}
+
+		return map;
+	}
+
+	@GetMapping("existNickName/{nickName}")
+	@ResponseBody
+	public Map<String, Object> existNickName(@PathVariable String nickName) {
+		Map<String, Object> map = new HashMap<>();
+
+		MemberDto member = memberService.getByNickName(nickName);
+
+		if (member == null) {
+			map.put("status", "not exist");
+			map.put("message", "사용가능한 별명입니다.");
+		} else {
+			map.put("status", "exist");
+			map.put("message", "이미 존재하는 별명입니다.");
+		}
+
+		return map;
+	}
+	
+	@PostMapping("existEmail")
+	@ResponseBody
+	public Map<String, Object> existEmail(@RequestBody Map<String, String> req) {
+
+		Map<String, Object> map = new HashMap<>();
+
+		MemberDto member = memberService.getByEmail(req.get("email"));
+
+		if (member == null) {
+			map.put("status", "not exist");
+			map.put("message", "사용가능한 이메일입니다.");
+		} else {
+			map.put("status", "exist");
+			map.put("message", "이미 존재하는 이메일입니다.");
+		}
+
+		return map;
+	}
+	
 	
 	@GetMapping("login")
 	public void login() {
@@ -53,6 +113,7 @@ public class MemberController {
 	}
 	
 
+
 	@PostMapping("addAuth")
 	public String addAuth(String userId, MemberDto modifiedMemberInfo) {
 		System.out.println("userId????:"+userId);
@@ -79,6 +140,4 @@ public class MemberController {
 		return "redirect:/member/get?userId="+memberModifiedValues.getUserId();
 	}
 
-
-	
 }
