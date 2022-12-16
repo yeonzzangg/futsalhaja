@@ -55,13 +55,17 @@ public class MemberController {
 
 	@PostMapping("addAuth")
 	public String addAuth(String userId, MemberDto modifiedMemberInfo) {
-		//System.out.println("userId????:"+userId);
+		System.out.println("userId????:"+userId);
 		List<String> addAuthorities = new ArrayList<>();
 		
 		List<String> authorities = modifiedMemberInfo.getAuth();
 		for(String auth : authorities ) {
 			addAuthorities.add(auth);
 		}
+		
+		memberService.updateMemberAuth(userId, addAuthorities);
+		return "redirect:/member/get?userId="+userId;
+	}
 
 	//회원정보 수정
 	@PostMapping("modify")
@@ -72,11 +76,7 @@ public class MemberController {
 		//memberService.deleteMemberInfoByUserId(userId);
 		//memberService.insertMember(memberModifiedValues);
 
-		
-		System.out.println("add:"+addAuthorities);
-		memberService.updateMemberAuth(userId, addAuthorities);
-		
-		return "redirect:/member/get?userId="+userId;
+		return "redirect:/member/get?userId="+memberModifiedValues.getUserId();
 	}
 
 
