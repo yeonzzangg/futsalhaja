@@ -3,6 +3,8 @@
 <%@ attribute name="active" required="false" %> <%-- narvar active 초기값 false --%>
 <style>
 
+
+
 footer {
   width: 100%;
   height: 90px;
@@ -31,6 +33,7 @@ footer div {
 
 footer div span {
   margin-left: 20px;
+
 }
 
 #linkNav {
@@ -42,8 +45,11 @@ footer div span {
 	background-color: #ecf0f1;
 	margin-bottom: 20px;
 }
+
+
 </style>
 <footer>
+
 
     <nav id="linkNav">
         <a href='https://cocoder.tistory.com' target='_blank'>공지사항</a> |
@@ -60,3 +66,4 @@ footer div span {
     </div>
 
 </footer>
+

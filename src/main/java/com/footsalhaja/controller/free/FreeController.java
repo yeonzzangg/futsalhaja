@@ -49,7 +49,6 @@ public class FreeController {
 	public String insert(BoardDto board, MultipartFile[] files,
 			RedirectAttributes rttr) {
 		
-		System.out.println(files);
 		service.insertFile(board, files);
 		
 		return "redirect:/free/list";
@@ -109,7 +108,6 @@ public class FreeController {
 	@PreAuthorize("@boardSecurity.checkWriter(authentication.name, #board.fb_number)")
 	public String modify(BoardDto board, @RequestParam("files") MultipartFile[] addFiles,
 			@RequestParam(name = "removeFiles", required = false) List<String> removeFiles) {
-		System.out.println("수정에서 넘어온값"+removeFiles);
 		service.update(board, addFiles, removeFiles);
 		int num = board.getFb_number();
 		
