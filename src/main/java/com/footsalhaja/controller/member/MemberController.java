@@ -1,8 +1,5 @@
 package com.footsalhaja.controller.member;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.footsalhaja.domain.member.MemberDto;
 import com.footsalhaja.service.member.MemberService;
@@ -43,7 +41,7 @@ public class MemberController {
 	public void getAndModify(@RequestParam(name="userId") String userId, Model model){
 		//RequestParam 으로 member/get?userId= 아이디값 가져와서 db 요청 -> MemberDto 타입 member ->  addAttribute "member" 넣음 . 
 		//System.out.println(userId);
-		MemberDto memberInfoByUserId = memberService.selectMemberInfoByUserId(userId);
+		MemberDto memberInfoByUserId = (MemberDto) memberService.selectMemberInfoByUserId(userId).get(0);
 		System.out.println(memberInfoByUserId);
 		model.addAttribute("member", memberInfoByUserId);
 		
@@ -51,10 +49,10 @@ public class MemberController {
 	
 	//회원정보 수정
 	@PostMapping("modify")
-	public String memberInfoModify(MemberDto memberModifiedValues) {
+	public String memberInfoModify(MemberDto memberModifiedValues, @RequestParam("file") MultipartFile File) {
 		//수정은 DB 삭제하고 -> 새로 저장 하기.
 		
-		memberService.updateMemberInfoByUserId(memberModifiedValues);
+		memberService.updateMemberInfoByUserId(memberModifiedValues, File);
 		//memberService.deleteMemberInfoByUserId(userId);
 		//memberService.insertMember(memberModifiedValues);
 		
