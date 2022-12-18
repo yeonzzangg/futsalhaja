@@ -76,4 +76,5 @@ public interface MemberMapper {
 	public MemberDto selectByNickName(String nickName);
 
 
+
 }

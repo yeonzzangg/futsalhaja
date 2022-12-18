@@ -153,14 +153,16 @@ li {
 				</thead>
 				<tbody>
 					<c:forEach items="${usrAbLikeList}" var="likeAbList">
-						<tr>	
+
+						<c:url value="/academy/get" var="getLink">
+							<c:param name="ab_number" value="${likeAbList.ab_number}"></c:param>
+						</c:url> 
+						<tr onclick="location.href='${getLink}'" class="trtr">		
  						 	<td class="listTitle col-sm-6">
-								<c:url value="/academy/get" var="getLink">
-									<c:param name="ab_number" value="${likeAbList.ab_number}"></c:param>
-								</c:url> 
 								<i class="fa-solid fa-heart"></i><a class='move' href="${getLink }">${likeAbList.ab_title} </a>
 							</td> 
-						 	<td>${likeAbList.ab_insertDatetime}</td>					 	
+						 	<td>${likeAbList.ago}</td>					 	
+
 					</c:forEach>
 				</tbody>
 			</table>
@@ -177,14 +179,16 @@ li {
 				</thead>
 				<tbody>
 					<c:forEach items="${userFbLikeList}" var="likeFbList">
-						<tr>
+
+						<c:url value="/free/get" var="getLink">
+							<c:param name="number" value="${likeFbList.fb_number}"></c:param>
+						</c:url> 
+						<tr onclick="location.href='${getLink}'" class="trtr">	
  						 	<td class="listTitle col-sm-6">
-								<c:url value="/free/get" var="getLink">
-									<c:param name="number" value="${likeFbList.fb_number}"></c:param>
-								</c:url> 
 								<i class="fa-solid fa-heart"></i><a class='move' href="${getLink }">${likeFbList.fb_title} </a>
 							</td> 
-						 	<td>${likeFbList.fb_insertDatetime}</td>					 	
+						 	<td>${likeFbList.ago}</td>					 	
+
 					 	</tr>
 					</c:forEach>
 				</tbody>

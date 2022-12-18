@@ -17,7 +17,10 @@ public interface MemberService {
 	List<MemberDto> selectMemberList(int page, MemberPageInfo memberPageInfo, String keyword, String type);
 
 	List<Object> selectMemberInfoByUserId(String userId);
-  	int deleteMemberInfoByUserId(String userId);
+
+
+	int deleteMemberInfoByUserId(String userId);
+
 
 	int updateMemberInfoByUserId(MemberDto memberModifiedValues, MultipartFile file);
 	

@@ -24,6 +24,28 @@
 	
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+<style type="text/css">
+
+h2 {
+	text-align: center;
+	padding: 1px;
+ }
+ 
+  object {
+  text-align: center;
+  max-width: 250px;
+  height: 250px;
+  object-fit: cover;
+}
+
+.defaultImg {
+	text-align : center; 
+	margin-bottom: 12px;
+}
+
+</style>
+
 </head>
 
 <body>
@@ -32,7 +54,7 @@
 <section class="page-section" id="contact">
             <div class="container">
                 <!-- Contact Section Heading-->
-                <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">회원정보 수정</h2>
+                <h2>회원정보 수정</h2>
                 <!-- Icon Divider-->
                 <div class="divider-custom">
                     <div class="divider-custom-line"></div>
@@ -45,13 +67,19 @@
                     <div class="col-lg-8 col-xl-7">
                         <form action="/mypage/modify" method="post" id="contactForm" data-sb-form-api-token="API_TOKEN" enctype="multipart/form-data">
 						<%-- 프로필 이미지 출력 --%>
-						<div style="text-align : center;">
+
+						<div class= "defaultImg">
+							<c:if test="${member.profileImg eq null}">
+								<img class= "defaultImg" src="${pageContext.request.contextPath}/기본프로필.png">
+							</c:if>
 							<c:forEach items="${member.profileImg }" var="name">
-								<object data="${pageContext.request.contextPath}/기본프로필.png" type="image/png">
-								<textarea value = "${pageContext.request.contextPath}/user_profile/${member.userId }/${name}"></textarea>
-									<img src="${pageContext.request.contextPath}/user_profile/${member.userId }/${name}">
-								</object>
-							</c:forEach>		
+								<div class= "containerProfile">	
+									<object data="${imgUrl }/${member.userId }/${name}" type="image/png">
+										<img src="${pageContext.request.contextPath}/기본프로필.png">
+									</object>
+								</div>
+							</c:forEach>			
+
 						</div>	
 					
 						<div class="form-floating mb-3"">

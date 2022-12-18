@@ -24,6 +24,29 @@
 	
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+<style type="text/css">
+
+h2 {
+	text-align: center;
+	padding: 1px;
+ }
+ 
+
+ object {
+  text-align: center;
+  max-width: 250px;
+  height: 250px;
+  object-fit: cover;
+}
+
+.defaultImg {
+	text-align : center; 
+	margin-bottom: 12px;
+}
+
+</style>
+
 </head>
 <body>
 <!--현재 member테이블 의 컬럼들 ( userId, name, password, nickName, email, birthYY, birthMM, birthDD, activityArea, phone, personalGender, auth ) -->
@@ -32,7 +55,7 @@
 <section class="page-section" id="contact">
             <div class="container">
                 <!-- Contact Section Heading-->
-                <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">${member.userId}님의 회원정보</h2>
+                <h2>${member.userId}님의 회원정보</h2>
                 <!-- Icon Divider-->
                 <div class="divider-custom">
                     <div class="divider-custom-line"></div>
@@ -49,15 +72,19 @@
 
 					<form action="${modifyLink}" method="get" id="contactForm" data-sb-form-api-token="API_TOKEN" enctype="multipart/form-data">
 							<%-- 프로필 이미지 출력 --%>
-						<div style="text-align : center;">
+
+						<div class= "defaultImg">
+							<c:if test="${member.profileImg eq null}">
+								<img class= "defaultImg" src="${pageContext.request.contextPath}/기본프로필.png">
+							</c:if>
 							<c:forEach items="${member.profileImg }" var="name">
-								<div class= >
-								<object data="${pageContext.request.contextPath}/기본프로필.png" type="image/png">
-								<div>"${pageContext.request.contextPath}/user_profile/${member.userId }/${name}"</div>
-									<img src="${pageContext.request.contextPath}/user_profile/${member.userId }/${name}">
-								</object>
+								<div class= "containerProfile">	
+									<object data="${imgUrl }/${member.userId }/${name}" type="image/png">
+										<img src="${pageContext.request.contextPath}/기본프로필.png">
+									</object>
 								</div>
-							</c:forEach>		
+							</c:forEach>			
+
 						</div>	
 							
 							<!-- ID -->
@@ -100,7 +127,6 @@
 									data-sb-validations="required" readonly/> <label for="nickName">닉네임</label>
 							</div>
 
-
 							<!-- 회원권한-->
 							<input type="hidden" name="auth" value="${member.auth}" readonly >
 							<div class="form-floating mb-3">
@@ -118,7 +144,6 @@
 							</c:if>	
 								<label for="permission">회원권한</label>
 							</div>
-				
 
 							<!-- 이메일 -->
 							<div class="form-floating mb-3">
@@ -128,19 +153,14 @@
 							</div>
 
 
-							<div class="form-floating mb-3">
-								<input class="form-control" type="text" name="birthYY"
-									value="${member.birthYY}" readonly /> <label for="birthYY">년</label>
-							</div>
-							<div class="form-floating mb-3">
-								<input class="form-control" type="text" name="birthMM"
-									value="${member.birthMM}" readonly /> <label for="birthMM">월</label>
-							</div>
-							<div class="form-floating mb-3">
-								<input class="form-control" type="text" name="birthDD"
-									value="${member.birthDD}" readonly /> <label for="birthDD">일</label>
-							</div>
-
+						<!-- 생년월일 -->
+						<div class="form-floating mb-3">
+							<c:if test="${member.birthMM < 10}">
+								<c:set var="zeroMM" value="0" />
+							</c:if>
+							<c:if test="${member.birthDD < 10}">
+								<c:set var="zeroDD" value="0" />
+							</c:if>
 
 							<input class="form-control" type="text" id="birthYYMMDD"
 								name="birthYY"

@@ -138,7 +138,8 @@ li {
 		<h3>${userId}님이 작성한 댓글 <i class="fa-regular fa-comment-dots"></i></h3>
 	</div>
 	<div id="categoryBox" >
-		<a id ="bookBtn" href="#book"><button type="button" class="btn btn-outline-success">예약 (${countActivity.countMainReplyList})</button></a>
+
+		<a id ="bookBtn" href="#categoryBox"><button type="button" class="btn btn-outline-success">예약 (${countActivity.countMainReplyList})</button></a>
 		<a id ="academyBtn" href="#academy"><button type="button" class="btn btn-outline-success">아카데미 (${countActivity.countAbReplyList})</button></a>
 		<a id ="freeBtn" href="#freeBoard"><button type="button" class="btn btn-outline-success">자유게시판 (${countActivity.countFbReplyList})</button></a>
 	</div>		
@@ -156,14 +157,16 @@ li {
 				</thead>
 				<tbody>
 					<c:forEach items="${userMainReplyList}" var="replyMainList">
-						<tr>
+
+						<c:url value="/main/get" var="getLink">
+							<c:param name="bookId" value="${replyMainList.book_bookId}"></c:param>
+						</c:url> 
+						<tr onclick="location.href='${getLink}'" class="trtr">
  						 	<td class="listTitle col-sm-6">
-								<c:url value="/main/get" var="getLink">
-									<c:param name="bookId" value="${replyMainList.book_bookId}"></c:param>
-								</c:url> 
 								<i class="fa-regular fa-comment-dots"></i><a class='move' href="${getLink }">${replyMainList.replyContent} </a>
 							</td> 
-						 	<td>${replyMainList.insertDatetime}</td>					 	
+						 	<td>${replyMainList.ago}</td>					 	
+
 					 	</tr>
 					</c:forEach>
 				</tbody>
@@ -181,14 +184,16 @@ li {
 				</thead>
 				<tbody>
 					<c:forEach items="${userAbReplyList}" var="replyAbList">
-						<tr>	
+
+						<c:url value="/academy/get" var="getLink">
+							<c:param name="ab_number" value="${replyAbList.ab_number}"></c:param>
+						</c:url> 
+						<tr onclick="location.href='${getLink}'" class="trtr">	
 						 	<td class="listTitle col-sm-6">
-							<c:url value="/academy/get" var="getLink">
-								<c:param name="ab_number" value="${replyAbList.ab_number}"></c:param>
-							</c:url> 
 							<i class="fa-regular fa-comment-dots"></i><a class='move' href="${getLink }">${replyAbList.ab_replyContent} </a>
 						</td> 
-					 	<td>${replyAbList.ab_replyInsertDatetime}</td>					 	
+					 	<td>${replyAbList.ago}</td>					 	
+
 					</c:forEach>
 				</tbody>
 			</table>
@@ -205,14 +210,15 @@ li {
 				</thead>
 				<tbody>
 					<c:forEach items="${userFbReplyList}" var="replyFbList">
-						<tr>
+						<c:url value="/free/get" var="getLink">
+							<c:param name="number" value="${replyFbList.freeBoard_fb_number}"></c:param>
+						</c:url> 
+						<tr onclick="location.href='${getLink}'" class="trtr">	
 							<td class="listTitle col-sm-6">
-								<c:url value="/free/get" var="getLink">
-									<c:param name="number" value="${replyFbList.freeBoard_fb_number}"></c:param>
-								</c:url> 
 								<i class="fa-regular fa-comment-dots"></i><a class='move' href="${getLink }">${replyFbList.fb_replyContent} </a>
 							</td> 
-						 	<td>${replyFbList.fb_insertDatetime}</td>					 	
+						 	<td>${replyFbList.ago}</td>					 	
+
 					 	</tr>
 					</c:forEach>
 				</tbody>
@@ -223,9 +229,8 @@ li {
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
 		<script type="text/javascript">
 			$(".btn btn-default").click(function(event){
-				event.preventDefault();
 				x = $(this).attr("href");
-				$("html, body").stop().animate({ scrollTop : $(x).offset().top}, 1000, "easeInOutExpo");
+				$("html, body").stop().animate({ scrollTop : $(x).offset().top - 130}, 1000, "easeInOutExpo");
 			});
 		
 		
