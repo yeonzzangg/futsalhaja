@@ -219,7 +219,7 @@ ul {
 					<c:param name="ab_number" value="${board.ab_number }"></c:param>
 				</c:url>
 				<a class="btn btn-outline-success modifyBtn" href="${modifyLink }">수정</a>
-
+		</c:if>		
 		<!-- 작성자와 authentication.name이 같아야 삭제&수정버튼 보여주기 -->
 		<sec:authentication property="name" var="userIdValue" />
 		
