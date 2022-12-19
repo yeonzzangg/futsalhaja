@@ -10,16 +10,11 @@ import org.apache.catalina.mapper.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
-
-<<<<<<< HEAD
-import com.footsalhaja.domain.academy.BoardDto;
-=======
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.footsalhaja.domain.academy.BoardDto;
 
->>>>>>> main
 import com.footsalhaja.domain.member.MemberDto;
 import com.footsalhaja.domain.member.MemberPageInfo;
 import com.footsalhaja.mapper.member.MemberMapper;
@@ -36,20 +31,13 @@ public class MemberServiceImpl implements MemberService {
 	
 	@Autowired
 	private MemberMapper memberMapper;
-	
-<<<<<<< HEAD
-=======
 
->>>>>>> main
 	@Autowired
 	private S3Client s3Client;
 	
 	@Value("${aws.s3.bucket}")
 	private String bucketName;
 	
-	
-<<<<<<< HEAD
-=======
 
 	@Override
 	public MemberDto getByEmail(String email) {
@@ -66,8 +54,7 @@ public class MemberServiceImpl implements MemberService {
 	public MemberDto getById(String userId){
 		return memberMapper.selectByUserId(userId);
 	}
-
->>>>>>> main
+  
 	//회원가입(등록) 또는 회원정보 수정
 	@Override
 	public int insertMember(MemberDto member) {
@@ -116,19 +103,11 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public List<Object> selectMemberInfoByUserId(String userId) {
 		List<Object> list = new ArrayList<>();
-<<<<<<< HEAD
-=======
-
->>>>>>> main
 		
 		MemberDto memberInfo = memberMapper.selectMemberInfoByUserId(userId);
 		
 		Map<String, Integer> countActivity = new HashMap<>();
-		
-<<<<<<< HEAD
-=======
 
->>>>>>> main
 		int countAllAblist = memberMapper.countAllAblist(userId);
 		int countAllFblist = memberMapper.countAllFblist(userId);
 		int countAllMainlist = memberMapper.countAllMainlist(userId);
@@ -157,7 +136,6 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public int deleteMemberInfoByUserId(String userId) {
 		//프로필 이미지 삭제
-<<<<<<< HEAD
 		String profileImg = memberMapper.selectMemberInfoByUserId(userId).getProfileImg();
 		
 		if (profileImg != null) {
@@ -174,40 +152,21 @@ public class MemberServiceImpl implements MemberService {
 		memberMapper.deleteMemberReplysByUserId(userId);
 		//회원탈퇴 좋아요 지우기
 		memberMapper.deleteMemberLikesByUserId(userId);
-=======
-
-	
-		//저장된 파일의 경로 지정
-		String path = "user_profile/" +userId;
-
-		File folder = new File(path);
 		
-		File[] listFiles = folder.listFiles();
-
-		if (listFiles != null) {
-				for (File file : listFiles) {
-
-					deleteFile(userId, file.getName());
-
-				}
-			}
+		if (profileImg != null) {
+			// s3 저장소의 프로필 지우기
+			deleteFile(userId, profileImg);
 		
-		for (File file: listFiles) {
-			file.delete();
 		}
-		folder.delete();
 		
+		//DB 프로필 지우기
 		memberMapper.deleteProfileImgByUserId(userId);
-		
-
-		//회원탈퇴 게시물 댓글 지우기
-		
 		//회원탈퇴 게시물 지우기
-		
+		memberMapper.deleteMemberDocumentsByUserId(userId);
+		//회원탈퇴 게시물 댓글 지우기
+		memberMapper.deleteMemberReplysByUserId(userId);
 		//회원탈퇴 좋아요 지우기
-
-		
->>>>>>> main
+		memberMapper.deleteMemberLikesByUserId(userId);
 		//회원탈퇴 FK Authority ByUserId
 		memberMapper.deleteAuthorityByUserId(userId);
 		//회원탈퇴 member ByUserId
@@ -252,10 +211,6 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public int updateMemberInfoByUserId(MemberDto memberModifiedValues, MultipartFile file) {
 		
-<<<<<<< HEAD
-		
-=======
->>>>>>> main
 		if (file != null && file.getSize() > 0) {
 			//기존 프로필 삭제
 			memberMapper.deleteProfileImgByUserId(memberModifiedValues.getUserId());
@@ -264,10 +219,6 @@ public class MemberServiceImpl implements MemberService {
 			memberMapper.insertprofileImg(memberModifiedValues.getUserId(), file.getOriginalFilename());
 			// 파일 저장
 			uploadFile(memberModifiedValues.getUserId(),file);
-<<<<<<< HEAD
-=======
-
->>>>>>> main
 		}
 		
 		int cnt = memberMapper.updateMemberInfoByUserId(memberModifiedValues);

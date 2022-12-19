@@ -1,14 +1,9 @@
 package com.footsalhaja.controller.member;
 
-<<<<<<< HEAD
-=======
-
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
->>>>>>> main
 
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -112,10 +107,7 @@ public class MemberController {
 	public void getAndModify(@RequestParam(name="userId") String userId, Model model){
 		//RequestParam 으로 member/get?userId= 아이디값 가져와서 db 요청 -> MemberDto 타입 member ->  addAttribute "member" 넣음 . 
 		//System.out.println(userId);
-<<<<<<< HEAD
-=======
 
->>>>>>> main
 		MemberDto memberInfoByUserId = (MemberDto) memberService.selectMemberInfoByUserId(userId).get(0);
 		System.out.println(memberInfoByUserId);
 
