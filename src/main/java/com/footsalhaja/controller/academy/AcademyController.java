@@ -1,13 +1,14 @@
 package com.footsalhaja.controller.academy;
 
-import java.io.File;
-
-import java.io.IOException;
 import java.io.InputStream;
 import java.net.InetAddress;
 import java.net.URLEncoder;
+<<<<<<< HEAD
+
+=======
 import java.nio.charset.StandardCharsets;
 import java.time.Duration;
+>>>>>>> main
 import java.time.Instant;
 import java.util.HashMap;
 import java.util.List;
@@ -16,7 +17,11 @@ import java.util.UUID;
 
 import javax.servlet.http.HttpServletResponse;
 
+<<<<<<< HEAD
+
+=======
 import org.apache.commons.io.FileUtils;
+>>>>>>> main
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -43,28 +48,45 @@ import com.footsalhaja.service.academy.AcademyServiceImpl;
 import software.amazon.awssdk.auth.credentials.AwsCredentials;
 import software.amazon.awssdk.auth.credentials.AwsCredentialsProvider;
 import software.amazon.awssdk.core.ResponseBytes;
+<<<<<<< HEAD
+
+=======
 import software.amazon.awssdk.core.ResponseInputStream;
 import software.amazon.awssdk.regions.Region;
+>>>>>>> main
 import software.amazon.awssdk.services.s3.S3Client;
 import software.amazon.awssdk.services.s3.model.GetObjectRequest;
 import software.amazon.awssdk.services.s3.model.GetObjectResponse;
 import software.amazon.awssdk.services.s3.model.ObjectCannedACL;
 import software.amazon.awssdk.services.s3.model.PutObjectRequest;
+<<<<<<< HEAD
+=======
 import software.amazon.awssdk.services.s3.model.S3Object;
 import software.amazon.awssdk.services.s3.presigner.S3Presigner;
 import software.amazon.awssdk.services.s3.presigner.model.PresignedPutObjectRequest;
 import software.amazon.awssdk.services.s3.presigner.model.PutObjectPresignRequest;
+>>>>>>> main
 
 
 import com.amazonaws.HttpMethod;
 import com.amazonaws.auth.AWSCredentials;
+<<<<<<< HEAD
+
+import com.amazonaws.auth.AWSStaticCredentialsProvider;
+import com.amazonaws.auth.BasicAWSCredentials;
+=======
 import com.amazonaws.auth.AWSCredentialsProvider;
+>>>>>>> main
 import com.amazonaws.regions.Regions;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.s3.model.GeneratePresignedUrlRequest;
+<<<<<<< HEAD
+
+=======
 import com.amazonaws.auth.profile.ProfileCredentialsProvider;
 import com.amazonaws.auth.profile.ProfilesConfigFile;
+>>>>>>> main
 
 @Controller
 @RequestMapping("academy")
@@ -151,9 +173,13 @@ public class AcademyController {
 	  
 	  String ab_image = UUID.randomUUID() + originalFileName; //랜덤 UUID+파일이름으로 저장될 파일 새 이름
 	  
+<<<<<<< HEAD
+
+=======
 	  File targetFile = new File(ab_filePath + ab_image);
 	  
 	  System.out.println("targetFile: "+targetFile);
+>>>>>>> main
 	  System.out.println(ab_filePath);
 	  
 	  try {
@@ -169,6 +195,37 @@ public class AcademyController {
 			
 			// object(파일) 올리기
 			s3Client.putObject(putObjectRequest, requestBody);
+<<<<<<< HEAD
+	
+			//썸머노트 이미지 전달 위한 presigned URL 생성
+			  Regions clientRegion = Regions.AP_NORTHEAST_2;
+			  
+			  AWSCredentials credentials = new BasicAWSCredentials(awsCredentials.accessKeyId(), awsCredentials.secretAccessKey());
+			  
+			  AmazonS3 s3Client = AmazonS3ClientBuilder.standard()
+			  .withRegion(clientRegion)
+			  .withCredentials(new AWSStaticCredentialsProvider(credentials))
+			  .build();
+			  
+			  
+			  // Set the presigned URL to expire after 12 hours. 
+			  java.util.Date expiration = new java.util.Date(); 
+			  long expTimeMillis = Instant.now().toEpochMilli();
+			  expTimeMillis += 1000 * 60 * 60 *12; 
+			  expiration.setTime(expTimeMillis);
+			  
+			  // Generate the presigned URL.
+			  System.out.println("Generating pre-signed URL."); 
+			  GeneratePresignedUrlRequest generatePresignedUrlRequest = new GeneratePresignedUrlRequest(bucketName,ab_filePath)
+					  .withMethod(HttpMethod.GET)
+			  .withExpiration(expiration);
+			  
+			  String url =s3Client.generatePresignedUrl(generatePresignedUrlRequest).toString();
+			  
+			  System.out.println(url);
+			 
+			//url에 s3 bucket 파일 저장된 경로 전달해야됨... s3라 인증된 presignedUrl으로 전달
+=======
 			
 			//GeneratePresignedUrl
 			/*
@@ -217,6 +274,7 @@ public class AcademyController {
 			
 			System.out.println();
 			//url에 s3 bucket 파일 저장된 경로 전달해야됨... s3라 인증된 presignedUrl으로 전달했는데도 403에러 뜸...왜그럴까?
+>>>>>>> main
 			jsonObject.put("url", url);
 			jsonObject.put("ab_image", ab_image);
 			jsonObject.put("responseCode", "success");

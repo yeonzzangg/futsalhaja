@@ -1,7 +1,11 @@
 package com.footsalhaja.controller.member;
 
 import java.io.FileInputStream;
+<<<<<<< HEAD
+
+=======
 import java.io.FileNotFoundException;
+>>>>>>> main
 import java.io.InputStream;
 import java.util.List;
 import java.util.Map;
@@ -19,6 +23,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+
 import org.springframework.web.multipart.MultipartFile;
 
 import com.footsalhaja.domain.academy.AcademyReplyDto;
@@ -79,12 +85,18 @@ public class MypageContorller {
 		MemberDto memberInfoByUserId = (MemberDto) memberService.selectMemberInfoByUserId(userId).get(0);
 		
 		//프로필 이미지 보이기
+<<<<<<< HEAD
+=======
 
+>>>>>>> main
 		InputStream imageStream = new FileInputStream("user_profile/" + userId + "/" + memberInfoByUserId.getProfileImg());
 		byte[] imageByteArray = IOUtils.toByteArray(imageStream);
 		imageStream.close();
 		
+<<<<<<< HEAD
+=======
 
+>>>>>>> main
 		System.out.println("이미지 "+imageByteArray);
 		return new ResponseEntity<byte[]>(imageByteArray, HttpStatus.OK);
 		
@@ -104,7 +116,8 @@ public class MypageContorller {
 	}
 	@PostMapping("delete")
 	public String deleteMemberInfo(String userId) {
-		// 작성 예정 입니다... form ->post방식으로 히든input name ="userId" 응용 합니다.  
+		// 작성 예정 입니다... form ->post방식으로 히든input name ="userId" 응용 합니다.
+		
 		memberService.deleteMemberInfoByUserId(userId);
 		
 		return "redirect:/main/list";
