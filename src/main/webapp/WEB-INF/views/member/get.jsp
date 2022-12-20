@@ -41,14 +41,6 @@
 	<div class="container">
 		 <!-- Contact Section Heading-->
 		 <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">${member.userId}님의 회원정보</h2>
-
-		 <!-- Icon Divider-->
-         <div class="divider-custom">
-         
-             <div class="divider-custom-line"></div>
-             <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
-             <div class="divider-custom-line"></div>
-         </div>
          
          <div class="row justify-content-center">
         	<div class="col-lg-8 col-xl-7">

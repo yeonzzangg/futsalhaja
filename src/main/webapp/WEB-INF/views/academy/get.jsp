@@ -194,12 +194,9 @@ ul {
 #replyPageFooter {
 	text-align: center;
 }
-
-
 #replyPageFooter ul {
 	display: inline-block;
 }
-
 #replyPageFooter ul li {
 	display: inline-block;
 }
@@ -336,14 +333,14 @@ ul {
 				<div id="replyListContainer">
 					<!-- 댓글 나오는 부분 -->
 				</div>
-
 			</div>
 		</div>
 		<!-- 댓글 페이지 출력란 -->
 		<div class="replyPageFooterBox">
-		<div class="paginationBox" id="replyPageFooter">
+			<div class="paginationBox" id="replyPageFooter">
+			</div>
 		</div>
-		</div>
+
 		
 </div>
 	<!-- 게시글 삭제 모달 -->
