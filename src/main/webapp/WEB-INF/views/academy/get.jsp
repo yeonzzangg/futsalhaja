@@ -185,9 +185,17 @@ ul {
 	height: 30px;
 	border-radius: 50%;
 }
+.post_top .imgBox img {
+	width: 30px;
+	height: 30px;
+	border-radius: 50%;
+}
 
 
 /* 댓글페이지네이션 */
+.replyPageFooterBox {
+	text-align: center;
+}
 #replyPageFooter {
 	text-align: center;
 }
@@ -335,7 +343,9 @@ ul {
 			</div>
 		</div>
 		<!-- 댓글 페이지 출력란 -->
+		<div class="replyPageFooterBox">
 		<div class="paginationBox" id="replyPageFooter">
+		</div>
 		</div>
 		
 </div>
