@@ -128,16 +128,18 @@
 				 <c:url value="/mypage/myAbDocumentList" var="myAblist">
 	        		<c:param name="userId" value="${userIdValue }"/>
 	        	 </c:url>
-					<li><a class="dropdown-item" href="${myAblist }">아카데미 게시판 쓴 글 목록</a></li>
-				<c:url value="/mypage/myFbDocumentList" var="myFblist">
+
+					<li><a class="dropdown-item" href="${myAblist }">아카데미 쓴 글 목록</a></li>
+				<c:url value="myFbDocumentList" var="myFblist">
 	        		<c:param name="userId" value="${userIdValue }"/>
 	        	 </c:url>
-					<li><a class="dropdown-item" href="${myFblist }">자유게시판에 쓴 글 목록</a></li>
-				<c:url value="/mypage/myMainDocumentList" var="myBooklist">
+					<li><a class="dropdown-item" href="${myFblist }">자유게시판 쓴 글 목록</a></li>
+				<c:url value="myMainDocumentList" var="myBooklist">
 	        		<c:param name="userId" value="${userIdValue }"/>
 	        	 </c:url>
-				    <li><a class="dropdown-item" href="${myBooklist }">예약글 목록</a></li>
-				 <c:url value="/mypage/myReplyList" var="myReplylist">
+				    <li><a class="dropdown-item" href="${myBooklist }">예약 목록</a></li>
+				 <c:url value="myReplyList" var="myReplylist">
+
 	        		<c:param name="userId" value="${userIdValue }"/>
 	        	 </c:url> 
 				    <li><a class="dropdown-item" href="${myReplylist }">작성 댓글 목록</a></li>
