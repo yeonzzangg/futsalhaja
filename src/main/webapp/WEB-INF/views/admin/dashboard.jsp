@@ -159,7 +159,7 @@ SimpleDateFormat sf = new SimpleDateFormat("yyyy년 MM월 dd일 a hh:mm:ss");
 			      			<c:param name="d1" value=""/>
 			      			<c:param name="d2" value=""/>
 			      		</c:url>
-					        <a class="navbar-brand mr10px" href="${allBookListLink}">예약된 매치
+					        <a class="navbar-brand mr10px" href="${allBookListLink}">모집완료 Match
 					        	<span class="badge bg-danger rounded-pill">${todaybookedCount}</span>
 					        </a>
 					        
