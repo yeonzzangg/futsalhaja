@@ -145,7 +145,6 @@
 					<li><a class="dropdown-item" href="${myFblist }">자유게시판 쓴 글 목록</a></li>
 				
 				    <li><a class="dropdown-item" href="${myBooklist }">예약 목록</a></li>
-				 
 				    <li><a class="dropdown-item" href="${myReplylist }">작성 댓글 목록</a></li>
 				 
 				    <li><a class="dropdown-item" href="${myLikelist }">좋아요 한 글 목록</a></li>
