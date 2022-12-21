@@ -166,6 +166,8 @@ ul {
 	color: #666;
 }
 
+/* 검색 페이징 글작성버튼 */
+
 .container-sm .paginationBox{
 	text-align: center;
 	position: relative;

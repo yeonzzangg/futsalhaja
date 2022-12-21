@@ -40,7 +40,9 @@
 <section class="page-section" id="contact">
 	<div class="container">
 		 <!-- Contact Section Heading-->
-		 <h2 class="page-section-heading text-center text-uppercase text-secondary mb-2">${member.userId}님의 회원정보</h2>
+		 <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">${member.userId}님의 회원정보</h2>
+		 <!-- 권한은 List로 추가, 삭제한다. [ user AND ( manager OR admin) ] 회원은 여러 권한을 갖을 수 있다 . 하지만, 권한참조테이블 따로만들기 싫어서 그냥 하련다 .. -->
+
          
          <div class="row justify-content-center">
         	<div class="col-lg-8 col-xl-7">
